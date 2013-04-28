@@ -51,7 +51,7 @@ public abstract class CodeJamFileHandler {
         }
 
         String currentLine = reader.readLine();
-        lines_consumed++;
+        if(currentLine != null) lines_consumed++;
 
         return currentLine;
     }

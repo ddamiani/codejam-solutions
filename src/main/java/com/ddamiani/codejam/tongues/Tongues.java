@@ -9,7 +9,7 @@ import java.util.*;
  * Project A of google code jam 2012
  */
 public final class Tongues extends CodeJamFileHandler {
-    private final List<String> lines;
+    protected final List<String> lines;
     private final Translation trans;
 
     public Tongues(String inputFile, String outputFile) throws FileNotFoundException {

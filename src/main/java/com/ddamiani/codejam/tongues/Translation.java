@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Translation support class
  */
-public class Translation {
+public final class Translation {
     private InputStream normalStream;
     private InputStream mutatedStream;
     private Map<Character, Character> letterMapping;
@@ -19,7 +19,7 @@ public class Translation {
         revLetterMapping = null;
     }
 
-    public Character getMutatedVersion(Character normChar) {
+    public final Character getMutatedVersion(Character normChar) {
         if (letterMapping == null) {
             try {
                 loadLetterMap();
@@ -33,7 +33,7 @@ public class Translation {
         return letterMapping.get(normChar);
     }
 
-    public Character getNormalVersion(Character muteChar) {
+    public final Character getNormalVersion(Character muteChar) {
         if (revLetterMapping == null) {
             try {
                 loadLetterMap();
