@@ -1,4 +1,4 @@
-package com.ddamiani.codejam;
+package com.ddamiani.codejam.tongues;
 
 import org.junit.Before;
 

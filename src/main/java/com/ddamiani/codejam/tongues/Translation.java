@@ -1,10 +1,10 @@
-package com.ddamiani.codejam;
+package com.ddamiani.codejam.tongues;
 
 import java.io.*;
 import java.util.*;
 
 /**
- * Tr
+ * Translation support class
  */
 public class Translation {
     private InputStream normalStream;
@@ -20,7 +20,7 @@ public class Translation {
     }
 
     public Character getMutatedVersion(Character normChar) {
-        if(letterMapping == null) {
+        if (letterMapping == null) {
             try {
                 loadLetterMap();
             } catch (IOException e) {
@@ -28,13 +28,13 @@ public class Translation {
             }
         }
 
-        if(isInvalidChar(normChar)) return normChar;
+        if (isInvalidChar(normChar)) return normChar;
 
         return letterMapping.get(normChar);
     }
 
     public Character getNormalVersion(Character muteChar) {
-        if(revLetterMapping == null) {
+        if (revLetterMapping == null) {
             try {
                 loadLetterMap();
             } catch (IOException e) {
@@ -42,7 +42,7 @@ public class Translation {
             }
         }
 
-        if(isInvalidChar(muteChar)) return muteChar;
+        if (isInvalidChar(muteChar)) return muteChar;
 
         return revLetterMapping.get(muteChar);
     }
@@ -55,10 +55,10 @@ public class Translation {
 
         int norm;
         int mute;
-        while((norm = normal.read()) != -1 && (mute = mutated.read()) != -1) {
+        while ((norm = normal.read()) != -1 && (mute = mutated.read()) != -1) {
             char normChar = (char) norm;
             char muteChar = (char) mute;
-            if(isInvalidChar(normChar) || isInvalidChar(muteChar)) continue;
+            if (isInvalidChar(normChar) || isInvalidChar(muteChar)) continue;
 
             letterMapping.put(normChar, muteChar);
             revLetterMapping.put(muteChar, normChar);
