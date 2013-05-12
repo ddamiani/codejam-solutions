@@ -15,14 +15,25 @@ public final class Dancer {
     }
 
     public final boolean isValidTopScore(int topScore) {
-        final int upper = topScore + 1;
-        final int lower = topScore - 1;
+        return testTopScore(topScore, 1);
+    }
+
+    public final boolean isValidExceptionalTopScore(int topScore) {
+        return testTopScore(topScore, 2);
+    }
+
+    private boolean testTopScore(int topScore, int spread) {
+        final int lower = topScore > 0 ? topScore - spread : 0;
         final int remainder = score - topScore;
-        for(int outer = lower; outer <= upper; outer++) {
-            for(int inner = outer; inner <= outer + 1; inner++) {
-                if(remainder == inner + outer) return true;
+
+        if (remainder < 0) return false;
+
+        for (int outer = lower; outer <= topScore; outer++) {
+            for (int inner = outer; inner <= topScore; inner++) {
+                if (remainder == inner + outer) return true;
             }
         }
-        return true;
+
+        return false;
     }
 }

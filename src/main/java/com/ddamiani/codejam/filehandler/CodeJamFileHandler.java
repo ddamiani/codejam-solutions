@@ -30,6 +30,10 @@ public abstract class CodeJamFileHandler {
 
     public abstract void operateImpl() throws IOException;
 
+    public final boolean isTestMode() {
+        return testMode;
+    }
+
     public final int getNumLines() {
         return num_line;
     }

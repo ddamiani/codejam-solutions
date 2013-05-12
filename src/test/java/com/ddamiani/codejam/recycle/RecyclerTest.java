@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -19,6 +20,12 @@ public final class RecyclerTest {
     @Before
     public final void setUp() throws FileNotFoundException {
         tester = new Recycler(this.getClass().getResource("/test_recycle_input.txt").getFile(), null, true);
+    }
+
+    @Test
+    public final void testTestMode() throws FileNotFoundException {
+        Recycler nonTestRecycler = new Recycler(this.getClass().getResource("/test_recycle_input.txt").getFile(), null);
+        assertFalse(nonTestRecycler.isTestMode());
     }
 
     @Test

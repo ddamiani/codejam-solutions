@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Unit test for simple App.
@@ -17,6 +18,12 @@ public final class TonguesTest {
     @Before
     public final void setUp() throws FileNotFoundException {
         tester = new Tongues(this.getClass().getResource("/test_input.txt").getFile(), null, true);
+    }
+
+    @Test
+    public final void testTestMode() throws FileNotFoundException {
+        Tongues nonTestTongues = new Tongues(this.getClass().getResource("/test_input.txt").getFile(), null);
+        assertFalse(nonTestTongues.isTestMode());
     }
 
     @Test

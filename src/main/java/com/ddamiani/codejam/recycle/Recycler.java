@@ -26,47 +26,51 @@ public final class Recycler extends CodeJamFileHandler {
 
         String currentLine;
         while ((currentLine = readInputLine()) != null) {
-            int count = 0;
-            String[] nums = splitter.split(currentLine);
+            String[] numbers = splitter.split(currentLine);
 
-            if (nums.length != 2) {
-                System.err.println("Invalid number of input parameters : " + nums.length);
+            if (numbers.length != 2) {
+                System.err.println("Invalid number of input parameters : " + numbers.length);
                 continue;
             }
 
             try {
-                int paramOne = Integer.parseInt(nums[0]);
-                int paramTwo = Integer.parseInt(nums[1]);
+                int count = getNumRecyclable(Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
 
-                for (int forward = paramOne; forward <= paramTwo; forward++) {
-                    Set<Integer> already = new HashSet<Integer>();
-                    String strForward = Integer.toString(forward);
-                    for (int index = 1; index < strForward.length(); index++) {
-                        String strReverse = reverse(strForward, index);
-
-                        int reverse = Integer.parseInt(strReverse);
-
-                        if (reverse > forward && reverse >= paramOne &&
-                                reverse <= paramTwo && !already.contains(reverse)) {
-                            already.add(reverse);
-                            count++;
-                        }
-                    }
-
+                if (testMode) {
+                    results.add(count);
                 }
+
+                emitOutputLine(Integer.toString(count));
             } catch (NumberFormatException e) {
                 System.err.println("Input parameter is not an integer: " + e.getMessage());
             }
-
-            if (testMode) {
-                results.add(count);
-            }
-
-            emitOutputLine(Integer.toString(count));
         }
     }
 
     protected static String reverse(String value, int numPlaces) {
         return value.substring(numPlaces) + value.substring(0, numPlaces);
+    }
+
+    protected static int getNumRecyclable(int paramOne, int paramTwo) {
+        int count = 0;
+
+        for (int forward = paramOne; forward <= paramTwo; forward++) {
+            Set<Integer> already = new HashSet<Integer>();
+            String strForward = Integer.toString(forward);
+            for (int index = 1; index < strForward.length(); index++) {
+                String strReverse = reverse(strForward, index);
+
+                int reverse = Integer.parseInt(strReverse);
+
+                if (reverse > forward && reverse >= paramOne &&
+                        reverse <= paramTwo && !already.contains(reverse)) {
+                    already.add(reverse);
+                    count++;
+                }
+            }
+
+        }
+
+        return count;
     }
 }
