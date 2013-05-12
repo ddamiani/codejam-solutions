@@ -48,7 +48,6 @@ public final class Recycler extends CodeJamFileHandler {
 
                         if (reverse > forward && reverse >= paramOne &&
                                 reverse <= paramTwo && !already.contains(reverse)) {
-                            //System.out.println(forward + " " + reverse);
                             already.add(reverse);
                             count++;
                         }
