@@ -11,8 +11,10 @@ public abstract class CodeJamFileHandler {
     private int lines_emitted = 0;
     private final BufferedReader reader;
     private final BufferedWriter writer;
+    protected final boolean testMode;
 
-    public CodeJamFileHandler(String inputFileName, String outputFileName) throws FileNotFoundException {
+    public CodeJamFileHandler(String inputFileName, String outputFileName, boolean testMode) throws FileNotFoundException {
+        this.testMode = testMode;
         reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFileName)));
         if (outputFileName == null) {
             writer = new BufferedWriter(new OutputStreamWriter(System.out));

@@ -13,7 +13,11 @@ public final class Tongues extends CodeJamFileHandler {
     private final Translation trans;
 
     public Tongues(String inputFile, String outputFile) throws FileNotFoundException {
-        super(inputFile, outputFile);
+        this(inputFile, outputFile, false);
+    }
+
+    public Tongues(String inputFile, String outputFile, boolean testing) throws FileNotFoundException {
+        super(inputFile, outputFile, testing);
         lines = new ArrayList<String>();
         trans = new Translation(Tongues.class.getResourceAsStream("/normal_letters.txt"),
                 Tongues.class.getResourceAsStream("/mutated_letters.txt"));
@@ -27,11 +31,11 @@ public final class Tongues extends CodeJamFileHandler {
                 translatedStr.append(trans.getNormalVersion(letter));
             }
 
-            lines.add(translatedStr.toString());
-        }
+            if (testMode) {
+                lines.add(translatedStr.toString());
+            }
 
-        for (String line : lines) {
-            emitOutputLine(line);
+            emitOutputLine(translatedStr.toString());
         }
     }
 }

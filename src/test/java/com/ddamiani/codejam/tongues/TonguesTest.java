@@ -16,7 +16,7 @@ public final class TonguesTest {
 
     @Before
     public final void setUp() throws FileNotFoundException {
-        tester = new Tongues(this.getClass().getResource("/test_input.txt").getFile(), null);
+        tester = new Tongues(this.getClass().getResource("/test_input.txt").getFile(), null, true);
     }
 
     @Test
