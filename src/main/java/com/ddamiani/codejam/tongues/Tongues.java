@@ -18,7 +18,7 @@ public final class Tongues extends CodeJamFileHandler {
 
     public Tongues(String inputFile, String outputFile, boolean testing) throws FileNotFoundException {
         super(inputFile, outputFile, testing);
-        lines = new ArrayList<String>();
+        lines = new ArrayList<>();
         trans = new Translation(Tongues.class.getResourceAsStream("/normal_letters.txt"),
                 Tongues.class.getResourceAsStream("/mutated_letters.txt"));
     }

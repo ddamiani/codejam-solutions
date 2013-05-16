@@ -18,7 +18,7 @@ public final class Recycler extends CodeJamFileHandler {
 
     public Recycler(String inputFile, String outputFile, boolean testing) throws FileNotFoundException {
         super(inputFile, outputFile, testing);
-        results = new ArrayList<Integer>();
+        results = new ArrayList<>();
     }
 
     public final void operateImpl() throws IOException {
@@ -55,7 +55,7 @@ public final class Recycler extends CodeJamFileHandler {
         int count = 0;
 
         for (int forward = paramOne; forward <= paramTwo; forward++) {
-            Set<Integer> already = new HashSet<Integer>();
+            Set<Integer> already = new HashSet<>();
             String strForward = Integer.toString(forward);
             for (int index = 1; index < strForward.length(); index++) {
                 String strReverse = reverse(strForward, index);

@@ -19,7 +19,7 @@ public final class DanceContest extends CodeJamFileHandler {
 
     public DanceContest(String inputFile, String outputFile, boolean testing) throws FileNotFoundException {
         super(inputFile, outputFile, testing);
-        results = new ArrayList<Integer>();
+        results = new ArrayList<>();
     }
 
     public final void operateImpl() throws IOException {
@@ -72,7 +72,7 @@ public final class DanceContest extends CodeJamFileHandler {
     }
 
     private static List<Dancer> parseTotalPoints(String[] args) {
-        List<Dancer> results = new ArrayList<Dancer>();
+        List<Dancer> results = new ArrayList<>();
         for (String arg : args) {
             results.add(new Dancer(Integer.parseInt(arg)));
         }

@@ -50,8 +50,8 @@ public final class Translation {
     private void loadLetterMap() throws IOException {
         Reader normal = new BufferedReader(new InputStreamReader(normalStream));
         Reader mutated = new BufferedReader(new InputStreamReader(mutatedStream));
-        letterMapping = new HashMap<Character, Character>();
-        revLetterMapping = new HashMap<Character, Character>();
+        letterMapping = new HashMap<>();
+        revLetterMapping = new HashMap<>();
 
         int norm;
         int mute;

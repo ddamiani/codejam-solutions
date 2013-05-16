@@ -29,7 +29,7 @@ public final class MirrorRoom {
     private final List<List<MirrorType>> rows;
 
     public MirrorRoom(int numRows, int numColumns, String... args) {
-        rows = new ArrayList<List<MirrorType>>(numRows);
+        rows = new ArrayList<>(numRows);
         init(numRows, numColumns, args);
     }
 
@@ -49,7 +49,7 @@ public final class MirrorRoom {
                 throw new IllegalArgumentException("Column number mismatch: " + currentLine.length() + " vs. " + numColumns);
             }
 
-            List<MirrorType> currentRow = new ArrayList<MirrorType>(numColumns);
+            List<MirrorType> currentRow = new ArrayList<>(numColumns);
             for (char symbol : currentLine.toCharArray()) {
                 currentRow.add(MirrorType.findType(symbol));
             }
