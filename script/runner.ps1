@@ -7,7 +7,7 @@ if ($a -ne 2 -and $a -ne 3) {
     break
 }
 
-$jar = Join-Path $jar_dir codejam2012-0.0.1-SNAPSHOT.jar
+$jar = Join-Path $jar_dir codejam-solutions-0.0.1-SNAPSHOT.jar
 $main = "com.ddamiani.codejam.Runner"
 $imp_class = $args[0]
 $input = $args[1]
