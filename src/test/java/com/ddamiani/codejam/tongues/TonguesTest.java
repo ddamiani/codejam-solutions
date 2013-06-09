@@ -28,9 +28,9 @@ public final class TonguesTest {
 
     @Test
     public final void testLineNum() throws IOException {
-        assertEquals(0, tester.getNumLines());
+        assertEquals(0, tester.getNumCases());
         tester.operate();
-        assertEquals(3, tester.getNumLines());
+        assertEquals(3, tester.getNumCases());
         assertEquals(3, tester.getNumEmittedLines());
         assertEquals(3, tester.getNumConsumedLines());
     }

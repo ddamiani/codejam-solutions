@@ -30,9 +30,9 @@ public final class RecyclerTest {
 
     @Test
     public final void testLineNum() throws IOException {
-        assertEquals(0, tester.getNumLines());
+        assertEquals(0, tester.getNumCases());
         tester.operate();
-        assertEquals(4, tester.getNumLines());
+        assertEquals(4, tester.getNumCases());
         assertEquals(4, tester.getNumEmittedLines());
         assertEquals(4, tester.getNumConsumedLines());
     }

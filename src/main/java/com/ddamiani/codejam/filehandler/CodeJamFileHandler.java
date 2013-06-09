@@ -6,14 +6,20 @@ import java.io.*;
  * Class for handling input and output for google code jams
  */
 public abstract class CodeJamFileHandler {
-    private int num_line = 0;
-    private int lines_consumed = 0;
-    private int lines_emitted = 0;
+    private int numCases = 0;
+    private int linesConsumed = 0;
+    private int linesEmitted = 0;
+    private final int linesPerCase;
     private final BufferedReader reader;
     private final BufferedWriter writer;
     protected final boolean testMode;
 
     public CodeJamFileHandler(String inputFileName, String outputFileName, boolean testMode) throws FileNotFoundException {
+        this(inputFileName, outputFileName, testMode, 1);
+    }
+
+    public CodeJamFileHandler(String inputFileName, String outputFileName, boolean testMode, int linesPerCase) throws FileNotFoundException {
+        this.linesPerCase = linesPerCase;
         this.testMode = testMode;
         reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFileName)));
         if (outputFileName == null) {
@@ -24,7 +30,7 @@ public abstract class CodeJamFileHandler {
     }
 
     public final void operate() throws IOException {
-        num_line = Integer.parseInt(reader.readLine());
+        numCases = Integer.parseInt(reader.readLine());
         operateImpl();
     }
 
@@ -34,16 +40,20 @@ public abstract class CodeJamFileHandler {
         return testMode;
     }
 
-    public final int getNumLines() {
-        return num_line;
+    public final int getNumCases() {
+        return numCases;
     }
 
     public final int getNumEmittedLines() {
-        return lines_emitted;
+        return linesEmitted;
     }
 
     public final int getNumConsumedLines() {
-        return lines_consumed;
+        return linesConsumed;
+    }
+
+    public final int getNumLinesPerCase() {
+        return linesPerCase;
     }
 
     public final void close() throws IOException {
@@ -52,12 +62,12 @@ public abstract class CodeJamFileHandler {
     }
 
     public final String readInputLine() throws IOException {
-        if (lines_consumed > num_line) {
-            System.err.println("All intended input lines (" + num_line + ") have already been consumed!");
+        if (linesConsumed > numCases * linesPerCase) {
+            System.err.println("All intended input lines (" + numCases * linesPerCase + ") have already been consumed!");
         }
 
         String currentLine = reader.readLine();
-        if (currentLine != null) lines_consumed++;
+        if (currentLine != null) linesConsumed++;
 
         return currentLine;
     }
@@ -65,7 +75,7 @@ public abstract class CodeJamFileHandler {
     public final void emitOutputLine(String output) throws IOException {
         final String templateStr = "Case #%d: %s\n";
 
-        writer.write(String.format(templateStr, lines_emitted + 1, output));
-        lines_emitted++;
+        writer.write(String.format(templateStr, linesEmitted + 1, output));
+        linesEmitted++;
     }
 }
