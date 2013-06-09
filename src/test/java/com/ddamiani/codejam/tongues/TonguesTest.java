@@ -31,8 +31,8 @@ public final class TonguesTest {
         assertEquals(0, tester.getNumCases());
         tester.operate();
         assertEquals(3, tester.getNumCases());
-        assertEquals(3, tester.getNumEmittedLines());
-        assertEquals(3, tester.getNumConsumedLines());
+        assertEquals(tester.getNumCases(), tester.getNumEmittedLines());
+        assertEquals(tester.getNumCases() * tester.getNumLinesPerCase(), tester.getNumConsumedLines());
     }
 
     @Test
