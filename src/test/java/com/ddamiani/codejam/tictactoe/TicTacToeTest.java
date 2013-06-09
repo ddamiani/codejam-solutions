@@ -24,8 +24,8 @@ public final class TicTacToeTest {
 
     @Test
     public final void testTestMode() throws FileNotFoundException {
-        TicTacToe nonTestRecycler = new TicTacToe(this.getClass().getResource("/test_board_input.txt").getFile(), null);
-        assertFalse(nonTestRecycler.isTestMode());
+        TicTacToe nonTestTicTacToe = new TicTacToe(this.getClass().getResource("/test_board_input.txt").getFile(), null);
+        assertFalse(nonTestTicTacToe.isTestMode());
     }
 
     @Test
