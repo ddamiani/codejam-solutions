@@ -12,6 +12,7 @@ import java.util.regex.*;
  * Doesn't use big integers so it can't solve the second large input.
  */
 public final class SquarePalindrome extends CodeJamFileHandler {
+    private static final long DIGIT_LIMIT = 3l;
     protected final List<Long> results;
 
     public SquarePalindrome(String inputFile, String outputFile) throws FileNotFoundException {
@@ -39,7 +40,7 @@ public final class SquarePalindrome extends CodeJamFileHandler {
             long count = 0;
 
             for (long i = start; i <= end; i = customIterate(i)) {
-                if (!isAPalindrome(i)) continue;
+                if (hasHighDigits(i) || !isAPalindrome(i)) continue;
 
                 if (isAPalindrome(i * i)) count++;
             }
@@ -67,9 +68,18 @@ public final class SquarePalindrome extends CodeJamFileHandler {
         return true;
     }
 
+    private static boolean hasHighDigits(long input) {
+        while (input > 0l) {
+            if (input % 10l > DIGIT_LIMIT) return true;
+            input /= 10l;
+        }
+
+        return false;
+    }
+
     private static int getNumDigits(long number) {
         int num_digits = 0;
-        while (number > 0) {
+        while (number > 0l) {
             number /= 10l;
             num_digits++;
         }
