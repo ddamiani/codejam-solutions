@@ -39,7 +39,7 @@ public final class SquarePalindrome extends CodeJamFileHandler {
             final long end = (long) Math.floor(Math.sqrt(Double.parseDouble(numbers[1])));
             long count = 0;
 
-            for (long i = start; i <= end; i = customIterate(i)) {
+            for (long i = start; i <= end; i++) {
                 if (hasHighDigits(i) || !isAPalindrome(i)) continue;
 
                 if (isAPalindrome(i * i)) count++;
@@ -75,24 +75,5 @@ public final class SquarePalindrome extends CodeJamFileHandler {
         }
 
         return false;
-    }
-
-    private static int getNumDigits(long number) {
-        int num_digits = 0;
-        while (number > 0l) {
-            number /= 10l;
-            num_digits++;
-        }
-
-        return num_digits;
-    }
-
-    private static long customIterate(final long input) {
-        final int num_digits = getNumDigits(input * input);
-        if (num_digits % 2 == 1) {
-            return input + 1l;
-        }
-
-        return (long) Math.ceil(Math.sqrt(Math.pow(10, num_digits)));
     }
 }
