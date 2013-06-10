@@ -45,7 +45,7 @@ public final class LawnMowerTest {
                 Result.NO,
                 Result.YES);
         for (int i = 0; i < expectedResults.size(); i++) {
-            assertEquals("Test of board " + (i + 1), expectedResults.get(i), tester.results.get(i));
+            assertEquals("Test of lawn " + (i + 1), expectedResults.get(i), tester.results.get(i));
         }
     }
 }
