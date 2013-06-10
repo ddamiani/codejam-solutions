@@ -39,7 +39,7 @@ public final class SquarePalindrome extends CodeJamFileHandler {
             long count = 0;
 
             for (long i = start; i <= end; i++) {
-                if (!isAPalindrome(i)) continue;
+                if (getNumDigits(i * i) % 2 == 0 || !isAPalindrome(i)) continue;
 
                 if (isAPalindrome(i * i)) count++;
             }
@@ -52,7 +52,7 @@ public final class SquarePalindrome extends CodeJamFileHandler {
         }
     }
 
-    public static boolean isAPalindrome(long number) {
+    public static boolean isAPalindrome(final long number) {
         String numberStr = Long.toString(number);
         int counterOne = 0;
         int counterTwo = numberStr.length() - 1;
@@ -65,5 +65,15 @@ public final class SquarePalindrome extends CodeJamFileHandler {
         }
 
         return true;
+    }
+
+    private static int getNumDigits(long number) {
+        int num_digits = 0;
+        while (number > 0) {
+            number /= 10l;
+            num_digits++;
+        }
+
+        return num_digits;
     }
 }
