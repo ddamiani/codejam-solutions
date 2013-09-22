@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Project A of google code jam 2012
+ * Project A of google code jam 2012. Qualification Round 2012: Problem A.
  */
 public final class Tongues extends CodeJamFileHandler {
     protected final List<String> lines;

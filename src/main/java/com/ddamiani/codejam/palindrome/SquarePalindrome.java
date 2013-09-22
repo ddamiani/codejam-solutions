@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * A class for testing fair and square palindromes.
+ * A class for testing fair and square palindromes. Qualification Round 2013: Problem C.
  * <p/>
  * Doesn't use big integers so it can't solve the second large input.
  */

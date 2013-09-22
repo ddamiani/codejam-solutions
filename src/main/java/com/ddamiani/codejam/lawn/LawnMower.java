@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * Class for checking if a specific lawn configuration can be cut.
+ * Class for checking if a specific lawn configuration can be cut. Qualification Round 2013: Problem B.
  */
 public final class LawnMower extends CodeJamFileHandler {
     public enum Result {

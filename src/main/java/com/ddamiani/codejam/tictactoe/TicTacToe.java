@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Main class for the Tic Tac Toe challenge.
+ * Main class for the Tic Tac Toe challenge. Qualification Round 2013: Problem A.
  */
 public final class TicTacToe extends CodeJamFileHandler {
     public enum Result {

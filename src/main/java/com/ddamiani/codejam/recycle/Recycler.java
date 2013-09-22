@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * Main class for the recycler challenge
+ * Main class for the recycler challenge. Qualification Round 2012: Problem C.
  */
 public final class Recycler extends CodeJamFileHandler {
     protected final List<Integer> results;

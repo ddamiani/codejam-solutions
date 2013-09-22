@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * A dancing competition.
+ * A dancing competition. Qualification Round 2012: Problem B.
  */
 public final class DanceContest extends CodeJamFileHandler {
     private static final int MAX_SCORE = 10;
