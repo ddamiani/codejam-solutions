@@ -11,6 +11,20 @@ public class Runner {
     private static final String packageBaseName = Runner.class.getPackage().getName();
 
     public static void main(String[] args) {
+        final ClassLister<CodeJamFileHandler> problemGetter = new ClassLister<>(CodeJamFileHandler.class);
+
+        if (args[0].equals("-h") || args[0].equals("--help")) {
+            System.out.println("usage: codejam-runner [-h] PROBLEM_NAME INPUT_FILE [OUTPUT_FILE]");
+            System.out.println("\nCommand line runner for Google Codejam solutions");
+            System.out.println("\noptional arguments:");
+            System.out.println("  -h, --help    show this help message and exit");
+            System.out.println("\navailable problems:");
+            for (String problem : problemGetter.getSubpackagesWithSubClass(packageBaseName)) {
+                System.out.println("  " + problem);
+            }
+            System.exit(0);
+        }
+
         if (args.length != 2 && args.length != 3) {
             System.err.println("Incorrect number of input parameters!");
             System.exit(1);
@@ -23,7 +37,6 @@ public class Runner {
         }
 
         try {
-            ClassLister<CodeJamFileHandler> problemGetter = new ClassLister<>(CodeJamFileHandler.class);
             Class<? extends CodeJamFileHandler> problemClass = problemGetter.getFirstSubClassInPackage(packageBaseName + "." + args[0]);
             if (problemClass != null) {
                 Constructor constructor = problemClass.getConstructor(String.class, String.class);
