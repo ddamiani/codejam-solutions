@@ -14,8 +14,21 @@ public final class ClassLister<T> {
         this.baseClass = baseClass;
     }
 
+    public final List<String> getSubpackagesWithSubClass(final String packageName) {
+        List<String> packageList = new ArrayList<>();
+
+        for (String subPackageName : getPackageFileList(packageName, true)) {
+            Class<? extends T> foundClass = getFirstSubClassInPackage(packageName + "." + subPackageName);
+            if (foundClass != null && foundClass != baseClass) {
+                packageList.add(subPackageName);
+            }
+        }
+
+        return packageList;
+    }
+
     public final Class<? extends T> getFirstSubClassInPackage(final String packageName) {
-        for (String filename : getPackageFileList(packageName)) {
+        for (String filename : getPackageFileList(packageName, false)) {
             final Class<? extends T> foundClass = getAndTestClass(packageName, filename);
             if (foundClass != null) {
                 return foundClass;
@@ -27,7 +40,7 @@ public final class ClassLister<T> {
 
     public final List<Class<? extends T>> getClassListInPackage(final String packageName) {
         List<Class<? extends T>> classList = new ArrayList<>();
-        for (String filename : getPackageFileList(packageName)) {
+        for (String filename : getPackageFileList(packageName, false)) {
             final Class<? extends T> foundClass = getAndTestClass(packageName, filename);
             if (foundClass != null) {
                 classList.add(foundClass);
@@ -50,12 +63,22 @@ public final class ClassLister<T> {
         return null;
     }
 
-    private static String[] getPackageFileList(String packageName) {
+    private static String[] getPackageFileList(String packageName, boolean filter) {
         URL packageDirUrl = Thread.currentThread().getContextClassLoader().getResource(packageName.replace(".", "/"));
         if (packageDirUrl != null) {
             File packageDir = new File(packageDirUrl.getFile());
             if (packageDir.isDirectory()) {
-                return packageDir.list();
+                if (filter) {
+                    return packageDir.list(new FilenameFilter() {
+                        @Override
+                        public boolean accept(File dir, String name) {
+                            File candidate = new File(dir, name);
+                            return candidate.isDirectory();
+                        }
+                    });
+                } else {
+                    return packageDir.list();
+                }
             }
         }
         return new String[0];

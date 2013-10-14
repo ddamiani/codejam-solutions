@@ -45,19 +45,25 @@ public final class ClassListerTest {
 
     @Test
     public final void testFindClass() {
-        Class<? extends CodeJamFileHandler> test = lister.getFirstSubClassInPackage(packageBaseName);
+        final Class<? extends CodeJamFileHandler> test = lister.getFirstSubClassInPackage(packageBaseName);
         assertNotNull("Check that a class was returned", test);
         assertEquals("Check that the returned class is correct", FakeFileHandler.class, test);
     }
 
     @Test
     public final void testGetClassList() {
-        List<Class<? extends CodeJamFileHandler>> classList = lister.getClassListInPackage(packageBaseName);
-        List<Class<? extends CodeJamFileHandler>> expectedList = new ArrayList<>();
+        final List<Class<? extends CodeJamFileHandler>> classList = lister.getClassListInPackage(packageBaseName);
+        final List<Class<? extends CodeJamFileHandler>> expectedList = new ArrayList<>();
         expectedList.add(FakeFileHandler.class);
         expectedList.add(SuperFakeFileHandler.class);
 
         assertEquals("Test the class list size", 2, classList.size());
         assertEquals("Test that the list contains the expected entries", expectedList, classList);
+    }
+
+    @Test
+    public final void testGetSubpackagesWithSubClass() {
+        final List<String> packageList = lister.getSubpackagesWithSubClass(packageBaseName);
+        assertEquals("Test that the list is the right size", 0, packageList.size());
     }
 }
