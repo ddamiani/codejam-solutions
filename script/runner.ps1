@@ -2,13 +2,7 @@ $a = $args.length
 $root_dir = Join-Path (Split-Path $MyInvocation.MyCommand.Path -Parent) ..
 $jar_dir = Join-Path $root_dir target
 
-if ($a -ne 2 -and $a -ne 3) {
-    echo "Incorrect number of input parameters: $a"
-    break
-}
-
-$jar = Join-Path $jar_dir codejam-solutions-0.0.1-SNAPSHOT.jar
-$main = "com.ddamiani.codejam.Runner"
+$jar = Join-Path $jar_dir codejam-solutions-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 $imp_class = $args[0]
 $input = $args[1]
 $output = $args[2]
@@ -27,4 +21,4 @@ if(!(Test-Path $jar)) {
     }
 }
 
-java -cp $jar $main $imp_class $input $output
+java -jar $jar $imp_class $input $output

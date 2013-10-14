@@ -24,7 +24,7 @@ public final class ClassLister<T> {
     }
 
     public final Set<Class<? extends T>> getClassSetInPackage(final String packageName) {
-        Reflections reflections = new Reflections(packageName);
+        final Reflections reflections = new Reflections(packageName);
         return reflections.getSubTypesOf(baseClass);
     }
 }
