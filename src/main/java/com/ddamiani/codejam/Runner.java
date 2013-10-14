@@ -13,16 +13,18 @@ public class Runner {
     public static void main(String[] args) {
         final ClassLister<CodeJamFileHandler> problemGetter = new ClassLister<>(CodeJamFileHandler.class);
 
-        if (args[0].equals("-h") || args[0].equals("--help")) {
-            System.out.println("usage: codejam-runner [-h] PROBLEM_NAME INPUT_FILE [OUTPUT_FILE]");
-            System.out.println("\nCommand line runner for Google Codejam solutions");
-            System.out.println("\noptional arguments:");
-            System.out.println("  -h, --help    show this help message and exit");
-            System.out.println("\navailable problems:");
-            for (String problem : problemGetter.getSubpackagesWithSubClass(packageBaseName)) {
-                System.out.println("  " + problem);
+        if (args.length > 0) {
+            if (args[0].equals("-h") || args[0].equals("--help")) {
+                System.out.println("usage: codejam-runner [-h] PROBLEM_NAME INPUT_FILE [OUTPUT_FILE]");
+                System.out.println("\nCommand line runner for Google Codejam solutions");
+                System.out.println("\noptional arguments:");
+                System.out.println("  -h, --help    show this help message and exit");
+                System.out.println("\navailable problems:");
+                for (Class<? extends CodeJamFileHandler> problem : problemGetter.getClassSetInPackage(packageBaseName)) {
+                    System.out.println("  " + problem.getSimpleName());
+                }
+                System.exit(0);
             }
-            System.exit(0);
         }
 
         if (args.length != 2 && args.length != 3) {
@@ -37,7 +39,7 @@ public class Runner {
         }
 
         try {
-            Class<? extends CodeJamFileHandler> problemClass = problemGetter.getFirstSubClassInPackage(packageBaseName + "." + args[0]);
+            Class<? extends CodeJamFileHandler> problemClass = problemGetter.getClassInPackage(packageBaseName, args[0]);
             if (problemClass != null) {
                 Constructor constructor = problemClass.getConstructor(String.class, String.class);
                 CodeJamFileHandler fileHandler = (CodeJamFileHandler) constructor.newInstance(inputName, outputName);

@@ -1,40 +1,27 @@
 package com.ddamiani.codejam;
 
+import com.ddamiani.codejam.dance.DanceContest;
 import com.ddamiani.codejam.filehandler.CodeJamFileHandler;
+import com.ddamiani.codejam.lawn.LawnMower;
+import com.ddamiani.codejam.palindrome.SquarePalindrome;
+import com.ddamiani.codejam.palindrome.SquarePalindromeBig;
+import com.ddamiani.codejam.recycle.Recycler;
+import com.ddamiani.codejam.tictactoe.TicTacToe;
+import com.ddamiani.codejam.tongues.Tongues;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Unit tests of the ClassLister.
  */
 public final class ClassListerTest {
-    private final class FakeFileHandler extends CodeJamFileHandler {
-        public FakeFileHandler() throws FileNotFoundException {
-            super(null, null, false);
-        }
-
-        public void operateImpl() {
-            // No op
-        }
-    }
-
-    private final class SuperFakeFileHandler extends CodeJamFileHandler {
-        public SuperFakeFileHandler() throws FileNotFoundException {
-            super(null, null, false);
-        }
-
-        public void operateImpl() {
-            // No op
-        }
-    }
-
     private static final String packageBaseName = ClassListerTest.class.getPackage().getName();
     private ClassLister<CodeJamFileHandler> lister;
 
@@ -45,25 +32,28 @@ public final class ClassListerTest {
 
     @Test
     public final void testFindClass() {
-        final Class<? extends CodeJamFileHandler> test = lister.getFirstSubClassInPackage(packageBaseName);
+        final Class<? extends CodeJamFileHandler> test = lister.getClassInPackage(packageBaseName, "Tongues");
         assertNotNull("Check that a class was returned", test);
-        assertEquals("Check that the returned class is correct", FakeFileHandler.class, test);
+        assertEquals("Check that the returned class is correct", Tongues.class, test);
+
+        final Class<? extends CodeJamFileHandler> testBad = lister.getClassInPackage(packageBaseName, "Tongue");
+        assertNull("Check that a class was returned", testBad);
     }
 
     @Test
     public final void testGetClassList() {
-        final List<Class<? extends CodeJamFileHandler>> classList = lister.getClassListInPackage(packageBaseName);
-        final List<Class<? extends CodeJamFileHandler>> expectedList = new ArrayList<>();
-        expectedList.add(FakeFileHandler.class);
-        expectedList.add(SuperFakeFileHandler.class);
+        final Set<Class<? extends CodeJamFileHandler>> classSet = lister.getClassSetInPackage(packageBaseName);
+        final Set<Class<? extends CodeJamFileHandler>> expectedSet = new HashSet<>();
+        expectedSet.add(DanceContest.class);
+        expectedSet.add(SquarePalindromeBig.class);
+        expectedSet.add(LawnMower.class);
+        expectedSet.add(SquarePalindrome.class);
+        expectedSet.add(Recycler.class);
+        expectedSet.add(TicTacToe.class);
+        expectedSet.add(Tongues.class);
 
-        assertEquals("Test the class list size", 2, classList.size());
-        assertEquals("Test that the list contains the expected entries", expectedList, classList);
-    }
 
-    @Test
-    public final void testGetSubpackagesWithSubClass() {
-        final List<String> packageList = lister.getSubpackagesWithSubClass(packageBaseName);
-        assertEquals("Test that the list is the right size", 0, packageList.size());
+        assertEquals("Test the class list size", 7, classSet.size());
+        assertEquals("Test that the list contains the expected entries", expectedSet, classSet);
     }
 }
