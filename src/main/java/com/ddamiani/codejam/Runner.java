@@ -46,7 +46,7 @@ public class Runner {
                 fileHandler.operate();
                 fileHandler.close();
             } else {
-                System.out.println("The chosen problem \"" + args[0] + "\" is not a valid problem!");
+                System.err.println("The chosen problem \"" + args[0] + "\" is not a valid problem!");
                 System.exit(1);
             }
         } catch (Exception e) {
